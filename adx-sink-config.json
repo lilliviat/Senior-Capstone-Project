@@ -1,0 +1,18 @@
+{
+    "name": "storm",
+    "config": {
+        "connector.class": "com.microsoft.azure.kusto.kafka.connect.sink.KustoSinkConnector",
+        "flush.size.bytes": 10000,
+        "flush.interval.ms": 10000,
+        "tasks.max": 1,
+        "topics": "storm-events",
+        "kusto.tables.topics.mapping": "[{'topic': 'storm-events','db': 'Test Database', 'table': 'Storms','format': 'csv', 'mapping':'Storms_CSV_Mapping'}]",
+        "aad.auth.authority": "45f26ee5-f134-439e-bc93-e6c7e33d61c2",
+        "aad.auth.appid": "5ab055fb-d3d8-4ab8-8e6c-dd1918372a35",
+        "aad.auth.appkey": "ZEBQUT7s-CK6sLqQ_85Yr2vEmSyVZ3IdEI",
+        "kusto.ingestion.url": "https://ingest-swedatapipeline.eastus.kusto.windows.net",
+        "kusto.query.url": "https://swedatapipeline.eastus.kusto.windows.net",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "value.converter": "org.apache.kafka.connect.storage.StringConverter"
+    }
+}
