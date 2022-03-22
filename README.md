@@ -5,7 +5,7 @@
 - Visual Studio Code
 - Azure Data Explorer
 
-## Installing Apacahe Kafka
+## Installing Apache Kafka
 ### Steps to install kafka on Windows
 1. Apache Kafka can be installed directly from its site:
   https://kafka.apache.org/downloads
