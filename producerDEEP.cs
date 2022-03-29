@@ -1,16 +1,30 @@
 using KafkaNet;
 using KafkaNet.Model;
 using KafkaNet.Protocol;
+using Confluent.Kafka;
 
-static void Main(string[] args)
+static string ReadAllText(string path)
+{
+    return File.ReadAllText(path);
+}
+
+static void SendToKafka(string stream)
+{
+    string brokerList = "127.0.0.1:9092";
+    string topicName = "test.topic";
+
+    var config = new ProducerConfig {BootstrapServers = brokerList };
+
+    using (var producer = new ProducerBuilder<string, string>(config).Build())
+    {
+        try
         {
-            string payload ="Welcome to Kafka!";
-            string topic ="IDGTestTopic";
-            Message msg = new Message(payload);
-            Uri uri = new Uri(“http://localhost:9092”);
-            var options = new KafkaOptions(uri);
-            var router = new BrokerRouter(options);
-            var client = new Producer(router);
-            client.SendMessageAsync(topic, new List<Message> { msg }).Wait();
-            Console.ReadLine();
-        }
+            var deliveryReport = producer.ProduceAsync(topicName, new Message<string, string> { Key = "test", Value = stream });
+            producer.Flush();                                               
+         }
+         catch (ProduceException<string, string> e)
+         {
+             Console.WriteLine($"failed to deliver message: {e.Message} [{e.Error.Code}]");
+         }
+     }
+}
