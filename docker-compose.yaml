@@ -1,45 +1,30 @@
-version: "2"
+#@author
+#J oshua Zenn
+# Lillivia T
+# Nishik P
+# Alejandro D
+# Cole H
+# Gabe M
+
+version: '3'
 services:
   zookeeper:
-    image: debezium/zookeeper:latest
+    image: bitnami/zookeeper:3.6.2
     ports:
-      - 2181:2181
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
-    image: debezium/kafka:latest
-    ports:
-      - 9092:9092
-    links:
-      - zookeeper
+    image: bitnami/kafka:2.7.0
     depends_on:
       - zookeeper
     environment:
-      - ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
-  kusto-connect:
-    build:
-      context: ./connector
-      args:
-        KUSTO_KAFKA_SINK_VERSION: latest
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
+      - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
     ports:
-      - 8083:8083
-    links:
-      - kafka
-    depends_on:
-      - kafka
-    environment:
-      - BOOTSTRAP_SERVERS=kafka:9092
-      - GROUP_ID=adx
-      - CONFIG_STORAGE_TOPIC=my_connect_configs
-      - OFFSET_STORAGE_TOPIC=my_connect_offsets
-      - STATUS_STORAGE_TOPIC=my_connect_statuses
-  events-producer:
-    build:
-      context: ./storm-events-producer
-    links:
-      - kafka
-    depends_on:
-      - kafka
-    environment:
-      - KAFKA_BOOTSTRAP_SERVER=kafka:9092
-      - KAFKA_TOPIC=storm-events
-      - SOURCE_FILE=StormEvents.csv
+      - "9093:9093"
