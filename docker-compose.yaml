@@ -6,20 +6,22 @@
 # Cole H
 # Gabe M
 
-version: '2'
+version: '3.1'
 networks:
   swedatapipeline:
     driver: bridge
 services:
-  zookeeper:
-    image: bitnami/zookeeper:latest
+  zoo1:
+    image: zookeeper
+    restart: always
+    hostname: zoo1
+    ports:
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
     networks:
       - swedatapipeline
-    ports:
-      - '8084:80'
-    restart: always
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
     image: bitnami/kafka:latest
     networks:

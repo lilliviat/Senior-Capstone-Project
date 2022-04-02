@@ -39,7 +39,7 @@ public class deepProducer {
     private final static String TOPIC = "swedatapipeline";
     private final static String BOOTSTRAP_SERVERS =
             "localhost:9092,localhost:9093,localhost:9094";
-            
+
     //Construct standard Properties file
     private static Producer<Long, String> createProducer() {
         Properties props = new Properties();
@@ -73,7 +73,7 @@ public class deepProducer {
         try {
             for (long index = time; index < time + sendMessageCount; index++) {
                 final ProducerRecord<Long, String> record =
-                        new ProducerRecord<>(TOPIC, index, "Hello Mom " + index);
+                        new ProducerRecord<>(TOPIC, index, "Hello World " + index);
                 producer.send(record, (metadata, exception) -> {
                     long elapsedTime = System.currentTimeMillis() - time;
                     if (metadata != null) {
