@@ -33,6 +33,16 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 import java.util.Collections;
 
+//import SpringBoot Framework to containerize API
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+//SpringBoot Java Application to containerize API
+@SpringBootApplication
+@RestController
+
 public class deepFlowConsumer {
 
     private final static String TOPIC = "swedatapipeline";

@@ -33,6 +33,15 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 import java.util.Collections;
 
+//import SpringBoot Framework to containerize API
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+//SpringBoot Java Application to containerize API
+@SpringBootApplication
+@RestController
 //Create the Java class for the Kafka Topic Producer API
 public class deepProducer {
 
@@ -45,7 +54,7 @@ public class deepProducer {
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                                             BOOTSTRAP_SERVERS);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, "KafkaExampleProducer");
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, "KafkaNonsensoryProducer");
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                                         LongSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
@@ -58,12 +67,14 @@ public class deepProducer {
     //}
     //Main method to run the Producer API
     public static void main(String... args) throws Exception {
+        SpringApplication.run(Application.class, args);
         if (args.length == 0) {
             runProducer(5);
         } else {
             runProducer(Integer.parseInt(args[0]));
         }
-    }    
+    }   
+    @RequestMapping("/") 
     //runProducer function
     static void runProducer(final int sendMessageCount) throws InterruptedException {
         final Producer<Long, String> producer = createProducer();
