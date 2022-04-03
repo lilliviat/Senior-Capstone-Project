@@ -40,8 +40,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //SpringBoot Java Application to containerize API
-@SpringBootApplication
-@RestController
+//@SpringBootApplication
+//@RestController
 
 public class deepFlowConsumer {
 

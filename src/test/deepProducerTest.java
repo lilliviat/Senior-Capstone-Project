@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //SpringBoot Java Application to containerize API
-@SpringBootApplication
-@RestController
+//@SpringBootApplication
+//@RestController
 
 public class deepProducerTest {
     //Testing that the Kafka Produce ris being created to send String messages

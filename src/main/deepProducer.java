@@ -40,8 +40,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //SpringBoot Java Application to containerize API
-@SpringBootApplication
-@RestController
+//@SpringBootApplication
+//@RestController
 //Create the Java class for the Kafka Topic Producer API
 public class deepProducer {
 
@@ -66,8 +66,8 @@ public class deepProducer {
     //private static Producer<Long, String> createProducer(){
     //}
     //Main method to run the Producer API
-    public static void main(String... args) throws Exception {
-        SpringApplication.run(Application.class, args);
+    public static void main(String[] args) throws Exception {
+        //SpringApplication.run(Application.class, args);
         if (args.length == 0) {
             runProducer(5);
         } else {
