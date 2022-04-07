@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 //@RestController
 
 public class deepProducerTest {
-    //Testing that the Kafka Produce ris being created to send String messages
+    //Testing that the Kafka Producer is being created to send String messages
     @Test
     void givenKeyValue_whenSend_thenVerifyHistory() {
 
