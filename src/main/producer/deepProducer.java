@@ -45,23 +45,6 @@ import org.springframework.web.bind.annotation.RestController;
 //Create the Java class for the Kafka Topic Producer API
 public class deepProducer {
 
-    private final static String TOPIC = "swedatapipeline";
-    private final static String BOOTSTRAP_SERVERS =
-            "localhost:9092,localhost:9093,localhost:9094";
-
-    //Construct standard Properties file
-    private static Producer<Long, String> createProducer() {
-        Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                                            BOOTSTRAP_SERVERS);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, "KafkaNonsensoryProducer");
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                                        LongSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                                    StringSerializer.class.getName());
-        return new KafkaProducer<>(props);
-    }
-
     //Create the Kafka Topic Producer to send records
     //private static Producer<Long, String> createProducer(){
     //}
