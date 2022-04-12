@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Properties;
 
 public class KafkaTopic {
+
+    //added main method to the kafka topic
     public static void main(String[] args) throws Exception {
         //SpringApplication.run(Application.class, args);
         if (args.length == 0) {
@@ -21,7 +23,8 @@ public class KafkaTopic {
         } else {
             runProducer(Integer.parseInt(args[0]));
         }
-    }   
+    }
+
     //Call Properties do not set yet
     private Properties properties;
     private final static String TOPIC = "swedatapipeline";
