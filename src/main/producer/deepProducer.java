@@ -44,52 +44,38 @@ import org.springframework.web.bind.annotation.RestController;
 //@RestController
 //Create the Java class for the Kafka Topic Producer API
 public class deepProducer {
-
-    //Create the Kafka Topic Producer to send records
-    //private static Producer<Long, String> createProducer(){
-    //}
-    //Main method to run the Producer API
-    // public static void main(String[] args) throws Exception {
-    //     //SpringApplication.run(Application.class, args);
-    //     if (args.length == 0) {
-    //         runProducer(5);
-    //     } else {
-    //         runProducer(Integer.parseInt(args[0]));
-    //     }
-    // }   
-    @RequestMapping("/") 
-    //runProducer function
-    static void runProducer(final int sendMessageCount) throws InterruptedException {
-        final Producer<Long, String> producer = createProducer();
-        long time = System.currentTimeMillis();
-        final CountDownLatch countDownLatch = new CountDownLatch(sendMessageCount);
+    //@RequestMapping("/") 
+    //Create Producer
+    final Producer<String, String> producer = createProducer();    
     
-        try {
-            for (long index = time; index < time + sendMessageCount; index++) {
-                final ProducerRecord<Long, String> record =
-                        new ProducerRecord<>(TOPIC, index, "Hello World " + index);
-                producer.send(record, (metadata, exception) -> {
-                    long elapsedTime = System.currentTimeMillis() - time;
-                    if (metadata != null) {
-                        System.out.printf("sent record(key=%s value=%s) " +
-                                        "meta(partition=%d, offset=%d) time=%d\n",
-                                record.key(), record.value(), metadata.partition(),
-                                metadata.offset(), elapsedTime);
-                    } else {
-                        exception.printStackTrace();
-                    }
-                    countDownLatch.countDown();
-                });
-            }
-            countDownLatch.await(25, TimeUnit.SECONDS);
-        }finally {
-            producer.flush();
-            producer.close();
-        }
+    //Producer Constructor
+    public KafkaProd(Producer<String, String> producer){
+        this.producer = producer;
+    }
+
+    //Kafka send Metadata
+    public Future<RecordMEtadata> send(String key, String content){
+        ProducerRecord record = new ProducerRecord("topic_swe_deep", key, content);
+        return producer.send(record);
+    }
+
+    public void flush() {
+        producer.flush();
+    }
+ 
+    public void beginTransaction() {
+        producer.beginTransaction();
+    }
+    
+    public void initTransaction() {
+        producer.initTransaction();
+    }
+
+    public void commitTransaction() {
+        producer.commitTransaction();
     }
     
     //Send Kafka Message
     final ProducerRecord<K, V> record = new ProducerRecord<>(topic, key, value);
-    Future<RecordMEtadata> future = producer.send(record);
     //Exception handling for Kafka messages.
 }
