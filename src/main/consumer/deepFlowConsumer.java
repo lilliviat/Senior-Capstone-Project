@@ -44,23 +44,6 @@ import org.springframework.web.bind.annotation.RestController;
 //@RestController
 
 public class deepFlowConsumer {
-
-    private final static String TOPIC = "swedatapipeline";
-    private final static String BOOTSTRAP_SERVERS =
-            "localhost:9092,localhost:9093,localhost:9094";
-
-    private static Consumer<Long, String> createConsumer(){
-        //Construct standard Properties file
-        final Properties props = new Properties();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                                  BOOTSTRAP_SERVERS);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG,
-                                  "KafkaExampleConsumer");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-              LongDeserializer.class.getName());
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-              StringDeserializer.class.getName());
-
       // Create the consumer using props.
       final Consumer<Long, String> consumer =
                                   new KafkaConsumer<>(props);
