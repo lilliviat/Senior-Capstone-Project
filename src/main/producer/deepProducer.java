@@ -49,14 +49,7 @@ public class deepProducer {
     //private static Producer<Long, String> createProducer(){
     //}
     //Main method to run the Producer API
-    public static void main(String[] args) throws Exception {
-        //SpringApplication.run(Application.class, args);
-        if (args.length == 0) {
-            runProducer(5);
-        } else {
-            runProducer(Integer.parseInt(args[0]));
-        }
-    }   
+
     @RequestMapping("/") 
     //runProducer function
     static void runProducer(final int sendMessageCount) throws InterruptedException {

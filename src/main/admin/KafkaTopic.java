@@ -14,7 +14,14 @@ import java.util.Map;
 import java.util.Properties;
 
 public class KafkaTopic {
-
+    public static void main(String[] args) throws Exception {
+        //SpringApplication.run(Application.class, args);
+        if (args.length == 0) {
+            runProducer(5);
+        } else {
+            runProducer(Integer.parseInt(args[0]));
+        }
+    }   
     //Call Properties do not set yet
     private Properties properties;
     private final static String TOPIC = "swedatapipeline";
@@ -56,3 +63,4 @@ public class KafkaTopic {
         return new KafkaProducer<>(props);
     }
 }
+
