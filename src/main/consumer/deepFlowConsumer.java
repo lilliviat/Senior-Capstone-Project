@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class deepFlowConsumer {
       // Create the consumer using props.
-      final Consumer<Long, String> consumer =
+      final Consumer<String, String> consumer =
                                   new KafkaConsumer<>(props);
 
       // Subscribe to the topic.
@@ -54,7 +54,7 @@ public class deepFlowConsumer {
     }
 
     static void runConsumer() throws InterruptedException {
-        final Consumer<Long, String> consumer = createConsumer();
+        final Consumer<String, String> consumer = createConsumer();
 
         final int giveUp = 100;   int noRecordsCount = 0;
 

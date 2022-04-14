@@ -9,33 +9,12 @@ import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.KafkaFuture;
 import org.apache.kafka.common.config.TopicConfig;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 public class KafkaTopic {
-
-    //added main method to the kafka topic
-    public static void main(String[] args) throws Exception {
-        //SpringApplication.run(Application.class, args);
-        //Call Producer
-        deepProducer deepproducer = new deepProducer(producer);
-        if (args.length == 0) {
-            runProducer(5);
-        } else {
-            runProducer(Integer.parseInt(args[0]));
-        }
-    }
 
     //Call Properties do not set yet
     private final static String TOPIC = "swedatapipeline";
