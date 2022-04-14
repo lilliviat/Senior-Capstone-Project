@@ -29,6 +29,8 @@ import org.apache.kafka.clients.admin;
 import org.apache.kafka.clients.producer;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 import java.util.Collections;
@@ -45,14 +47,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class deepFlowConsumer {
       // Create the consumer using props.
-      final Consumer<String, String> consumer =
-                                  new KafkaConsumer<>(props);
 
+
+private static Logger mrlogger=LoggerFactory.getLogger(deepflowConsumer.class);
+    private java.util.function.Consumer<Throwable> exceptionConsumer;
+    private java.util.function.Consumer<deepflowConsumer> deepflowConsumer;
       // Subscribe to the topic.
-      consumer.subscribe(Collections.singletonList(TOPIC));
-        return consumer;
+    public deepflowConsumer(Consumer<String, Integer> consumer, java.util.function.Consumer<Throwable> exceptionConsumer, java.util.function.Consumer<CountryPopulation> deepflowConsumer) {
+        this.consumer = consumer;
+        this.exceptionConsumer = exceptionConsumer;
+        this.countryPopulationConsumer = deepflowConsumer;
+    }
+void subscribing(String topic){
+consume(() -> consumer.subscribe(Collections.singleton(topic)));
+}
+
+void assign(String topic, int partition){
+    consume(() -> consumer.assign(Collections.singleton(new TopicPartition(topic, partition))));
+}
+
+    void consume(Runnable beforePollingTask) {
+        try {
+            beforePollingTask.run();
+            while (true) {
+                ConsumerRecords<String, Integer> records = consumer.poll(Duration.ofMillis(1000));
+                StreamSupport.stream(records.spliterator(), false)
+                    .map(record -> new CountryPopulation(record.key(), record.value()))
+                    .forEach(countryPopulationConsumer);
+                consumer.commitSync();
+            }
+        } catch (WakeupException e) {
+            logger.info("stopping...");
+        } catch (RuntimeException ex) {
+            exceptionConsumer.accept(ex);
+        } finally {
+            consumer.close();
+        }
     }
 
+    public void stop() {
+        consumer.wakeup();
+    }
+
+
+    
+/*
     static void runConsumer() throws InterruptedException {
         final Consumer<String, String> consumer = createConsumer();
 
@@ -78,5 +117,5 @@ public class deepFlowConsumer {
         }
         consumer.close();
         System.out.println("DONE");
-    }
+    }*/
 }  
