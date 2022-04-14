@@ -49,13 +49,13 @@ public class deepProducer {
     final Producer<String, String> producer = createProducer();    
     
     //Producer Constructor
-    public KafkaProd(Producer<String, String> producer){
+    public deepProducer(Producer<String, String> producer){
         this.producer = producer;
     }
 
     //Kafka send Metadata
     public Future<RecordMEtadata> send(String key, String content){
-        ProducerRecord record = new ProducerRecord("topic_swe_deep", key, content);
+        ProducerRecord record = new ProducerRecord("swedatapipeline", key, content);
         return producer.send(record);
     }
 
@@ -76,6 +76,5 @@ public class deepProducer {
     }
     
     //Send Kafka Message
-    final ProducerRecord<K, V> record = new ProducerRecord<>(topic, key, value);
     //Exception handling for Kafka messages.
 }
