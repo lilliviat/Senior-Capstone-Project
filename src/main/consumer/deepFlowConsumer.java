@@ -58,13 +58,14 @@ private static Logger mrlogger=LoggerFactory.getLogger(deepflowConsumer.class);
         this.exceptionConsumer = exceptionConsumer;
         this.countryPopulationConsumer = deepflowConsumer;
     }
-void subscribing(String topic){
-consume(() -> consumer.subscribe(Collections.singleton(topic)));
-}
+    
+    void subscribing(String topic){
+        consume(() -> consumer.subscribe(Collections.singleton(topic)));
+    }
 
-void assign(String topic, int partition){
+    void assign(String topic, int partition){
     consume(() -> consumer.assign(Collections.singleton(new TopicPartition(topic, partition))));
-}
+    }
 
     void consume(Runnable beforePollingTask) {
         try {
@@ -87,10 +88,7 @@ void assign(String topic, int partition){
 
     public void stop() {
         consumer.wakeup();
-    }
-
-
-    
+    } 
 /*
     static void runConsumer() throws InterruptedException {
         final Consumer<String, String> consumer = createConsumer();
