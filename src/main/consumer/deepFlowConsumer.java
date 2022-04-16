@@ -49,20 +49,24 @@ public class deepFlowConsumer {
       // Create the consumer using props.
 
 
-private static Logger mrlogger=LoggerFactory.getLogger(deepflowConsumer.class);
+    private static Logger mrlogger=LoggerFactory.getLogger(deepFlowConsumer.class);
+    //Consumer declaration
+    private Consumer<String, Integer> consumer;
     private java.util.function.Consumer<Throwable> exceptionConsumer;
-    private java.util.function.Consumer<deepflowConsumer> deepflowConsumer;
-      // Subscribe to the topic.
-    public deepflowConsumer(Consumer<String, Integer> consumer, java.util.function.Consumer<Throwable> exceptionConsumer, java.util.function.Consumer<CountryPopulation> deepflowConsumer) {
+    private java.util.function.Consumer<deepFlowConsumer> deepflowConsumer;
+      // Consumer Constructor
+    public deepFlowConsumer(Consumer<String, Integer> consumer, java.util.function.Consumer<Throwable> exceptionConsumer, java.util.function.Consumer<deepFlowConsumer> deepflowConsumer) { //INclude Consumer mapping class here as a parameter
         this.consumer = consumer;
         this.exceptionConsumer = exceptionConsumer;
-        this.countryPopulationConsumer = deepflowConsumer;
+        this.deepflowConsumer = deepflowConsumer;
     }
     
+    //Subscribe to Kafka Topic to pull data.
     void subscribing(String topic){
         consume(() -> consumer.subscribe(Collections.singleton(topic)));
     }
 
+    //Read from topic and point to partitions
     void assign(String topic, int partition){
     consume(() -> consumer.assign(Collections.singleton(new TopicPartition(topic, partition))));
     }
@@ -73,12 +77,12 @@ private static Logger mrlogger=LoggerFactory.getLogger(deepflowConsumer.class);
             while (true) {
                 ConsumerRecords<String, Integer> records = consumer.poll(Duration.ofMillis(1000));
                 StreamSupport.stream(records.spliterator(), false)
-                    .map(record -> new CountryPopulation(record.key(), record.value()))
-                    .forEach(countryPopulationConsumer);
+                    .map(record -> new deepflowConsumer(record.key(), record.value())) //Create Consumer class of getters and setters; include here.
+                    .forEach(deepflowConsumer);
                 consumer.commitSync();
             }
         } catch (WakeupException e) {
-            logger.info("stopping...");
+            logger.info("Stopping stream...");
         } catch (RuntimeException ex) {
             exceptionConsumer.accept(ex);
         } finally {

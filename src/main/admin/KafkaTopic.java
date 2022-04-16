@@ -15,23 +15,7 @@ import java.util.Map;
 import java.util.Properties;
 
 public class KafkaTopic {
-
-    //Call Properties do not set yet
-    private final static String TOPIC = "swedatapipeline";
-    private final static String BOOTSTRAP_SERVERS =
-            "localhost:9092";
     
-    private static Producer<Long, String> createProducer() {
-        Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                                            BOOTSTRAP_SERVERS);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, "KafkaNonsensoryProducer");
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                                        LongSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                                    StringSerializer.class.getName());
-        return new KafkaProducer<>(props);
-    }
     //Properties constructor to set this.properties = properties
     public void KafkaTopic(){
         this.properties = properties;

@@ -1,5 +1,6 @@
 package main.admin;
 
+import org.apache.kafka.clients.deepFlowConsumer;
 import org.apache.kafka.clients.deepProducer;
 import org.apache.kafka.clients.admin.Admin;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -26,6 +27,8 @@ import java.util.Properties;
 
 public class Runner {
     public static void main(String[] args) {
+      deepFlowConsumer consume = new deepFlowConsumer();
+      deepProducer produce = new deepProducer();
         try {
             File myObj = new File("StormsEvents.csv");
             Scanner myReader = new Scanner(myObj);
