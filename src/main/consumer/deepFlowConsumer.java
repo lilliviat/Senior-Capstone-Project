@@ -55,7 +55,7 @@ public class deepFlowConsumer {
     private java.util.function.Consumer<Throwable> exceptionConsumer;
     private java.util.function.Consumer<deepFlowConsumer> deepflowConsumer;
       // Consumer Constructor
-    public deepFlowConsumer(Consumer<String, Integer> consumer, java.util.function.Consumer<Throwable> exceptionConsumer, java.util.function.Consumer<deepFlowConsumer> deepflowConsumer) { //INclude Consumer mapping class here as a parameter
+    public deepFlowConsumer(Consumer<String, Integer> consumer, java.util.function.Consumer<Throwable> exceptionConsumer, java.util.function.Consumer<deepFlowConsumer> deepflowConsumer) { //Include Consumer mapping class here as a parameter
         this.consumer = consumer;
         this.exceptionConsumer = exceptionConsumer;
         this.deepflowConsumer = deepflowConsumer;
