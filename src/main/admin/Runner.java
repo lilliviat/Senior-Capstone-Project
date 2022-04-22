@@ -32,7 +32,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-//import jaav utilities
+//import java utilities
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,8 +47,8 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class Runner {
     public static void main(String[] args) {
-      deepFlowConsumer consume = new deepFlowConsumer();
-      deepProducer produce = new deepProducer();
+      deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
+      deepProducer produce = new deepProducer(); //Consumer and Producer classes implement as an interface
         try {
             File myObj = new File("StormsEvents.csv");
             Scanner myReader = new Scanner(myObj);

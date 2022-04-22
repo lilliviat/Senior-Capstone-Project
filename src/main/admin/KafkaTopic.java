@@ -1,5 +1,16 @@
+/*
+*@authors 
+* Lillivia T
+* Nishik P
+* Alejandro D
+* Cole H
+* Gabe M
+*
+*/
+
 package main.admin;
 
+//import for kafka 
 import org.apache.kafka.clients.deepProducer;
 import org.apache.kafka.clients.admin.Admin;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -9,6 +20,7 @@ import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.KafkaFuture;
 import org.apache.kafka.common.config.TopicConfig;
 
+//import java utilities
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
