@@ -1,5 +1,8 @@
-//Maven Kafka Package
-package test;
+//Spring Kafka Package
+package com.seniorcapstoneproject.swedatapipeline;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 //Java imports declaration
 import org.apache.kafka.clients.admin;
@@ -7,6 +10,7 @@ import org.apache.kafka.clients.producer;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
+import java.beans.Transient;
 import java.util.Collections;
 
 //import SpringBoot Framework to containerize API
@@ -15,11 +19,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//SpringBoot Java Application to containerize API
-//@SpringBootApplication
-//@RestController
-
+@SpringBoot Test
 public class deepProducerTest {
+    
+    @Test
+    void contextLoads(){
+        
+    }
     //Testing that the Kafka Producer is being created to send String messages
     @Test
     void givenKeyValue_whenSend_thenVerifyHistory() {

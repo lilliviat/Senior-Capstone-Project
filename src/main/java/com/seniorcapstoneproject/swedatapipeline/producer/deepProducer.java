@@ -23,7 +23,7 @@
 */
 
 //Maven Kafka Package
-package org.apache.kafka.clients;
+package com.seniorcapstoneproject.swedatapipeline;
 
 //Java imports declaration
 import org.apache.kafka.clients.admin;

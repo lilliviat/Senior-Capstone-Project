@@ -8,7 +8,7 @@
 *
 */
 
-package main.admin;
+package com.seniorcapstoneproject.swedatapipeline;
 
 //import for kafka 
 import org.apache.kafka.clients.deepFlowConsumer;
@@ -46,8 +46,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Runner {
+@SpringBootApplication
+public class SwedatapipelineApplication {
     public static void main(String[] args) {
+      SpringApplication.run(SwedatapipelineApplication.class, args);
+      
       deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
       deepProducer produce = new deepProducer(); //Consumer and Producer classes implement as an interface
         try {
