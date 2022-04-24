@@ -41,11 +41,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//SpringBoot Java Application to containerize API
-//@SpringBootApplication
-//@RestController
-@GetMapping("/")
-public class deepFlowConsumer implements sweapi{
+public class deepFlowConsumer{
       // Create the consumer using props.
 
 
