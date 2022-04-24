@@ -47,11 +47,11 @@ public class deepFlowConsumer{
 
     private static Logger mrlogger=LoggerFactory.getLogger(deepFlowConsumer.class);
     //Consumer declaration
-    private Consumer<String, Integer> consumer;
+    private Consumer<String, String> consumer;
     private java.util.function.Consumer<Throwable> exceptionConsumer;
     private java.util.function.Consumer<deepFlowConsumer> deepflowConsumer;
       // Consumer Constructor
-    public deepFlowConsumer(Consumer<String, Integer> consumer, java.util.function.Consumer<Throwable> exceptionConsumer, java.util.function.Consumer<deepFlowConsumer> deepflowConsumer) { //Include Consumer mapping class here as a parameter
+    public deepFlowConsumer(Consumer<String, String> consumer, java.util.function.Consumer<Throwable> exceptionConsumer, java.util.function.Consumer<deepFlowConsumer> deepflowConsumer) { //Include Consumer mapping class here as a parameter
         this.consumer = consumer;
         this.exceptionConsumer = exceptionConsumer;
         this.deepflowConsumer = deepflowConsumer;
@@ -71,7 +71,7 @@ public class deepFlowConsumer{
         try {
             beforePollingTask.run();
             while (true) {
-                ConsumerRecords<String, Integer> records = consumer.poll(Duration.ofMillis(1000));
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
                 StreamSupport.stream(records.spliterator(), false)
                     .map(record -> new deepflowConsumer(record.key(), record.value())) //Create Consumer class of getters and setters; include here.
                     .forEach(deepflowConsumer);

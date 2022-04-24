@@ -11,8 +11,8 @@
 package com.seniorcapstoneproject.swedatapipeline;
 
 //import for kafka 
-import org.apache.kafka.clients.deepFlowConsumer;
-import org.apache.kafka.clients.deepProducer;
+//import org.apache.kafka.clients.deepFlowConsumer;
+//import org.apache.kafka.clients.deepProducer;
 import org.apache.kafka.clients.admin.Admin;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.CreateTopicsOptions;
@@ -25,12 +25,6 @@ import org.apache.kafka.common.config.TopicConfig;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
-//import JSON utilities
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 //import java utilities
 import java.util.Collections;
@@ -49,9 +43,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @SpringBootApplication
 public class SwedatapipelineApplication {
     public static void main(String[] args) {
-      SpringApplication.run(SwedatapipelineApplication.class, args);
+
+      ApplicationContext apc = SpringApplication.run(SwedatapipelineApplication.class, args);
       
-      deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
+      /*deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
       deepProducer produce = new deepProducer(); //Consumer and Producer classes implement as an interface
         try {
             File myObj = new File("StormsEvents.csv");
@@ -71,6 +66,6 @@ public class SwedatapipelineApplication {
                 runProducer(5);
             } else {
                 runProducer(Integer.parseInt(args[0]));
-            }
+            }*/
     }
 }
