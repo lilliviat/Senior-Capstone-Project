@@ -39,12 +39,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.sweapi;
+
 //SpringBoot Java Application to containerize API
 //@SpringBootApplication
 //@RestController
+
+@GetMapping("/")
 //Create the Java class for the Kafka Topic Producer API
-public class deepProducer {
-    //@RequestMapping("/") 
+public class deepProducer implements sweapi{
     //Create Producer
     final Producer<String, String> producer = createProducer();    
     

@@ -68,6 +68,12 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+		 <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
+		 <dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.13</artifactId>
+			<version>3.0.1</version>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -78,6 +84,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>spring-boot-aws-exe</finalName>
 	</build>
 
 </project>

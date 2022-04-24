@@ -43,10 +43,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
+@RestController
 public class Runner {
     public static void main(String[] args) {
+      //Spring framework interface used for Enterprise Data-driven development.
+      ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+      Sweapi obj = (Sweapi)context.getBean("consumer");
+
       deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
       deepProducer produce = new deepProducer(); //Consumer and Producer classes implement as an interface
         try {

@@ -44,8 +44,8 @@ import org.springframework.web.bind.annotation.RestController;
 //SpringBoot Java Application to containerize API
 //@SpringBootApplication
 //@RestController
-
-public class deepFlowConsumer {
+@GetMapping("/")
+public class deepFlowConsumer implements sweapi{
       // Create the consumer using props.
 
 
