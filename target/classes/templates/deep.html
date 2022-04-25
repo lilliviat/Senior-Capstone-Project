@@ -1,0 +1,92 @@
+{% load static %}
+<!--Adding this tag in order to commit form IntelliJ-->
+<html>
+    <head>
+        <link rel="stylesheet" href="deep.css">
+        <link rel="stylesheet" href="{% static 'fontawesome_free/css/all.min.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+  </head>
+        <script type="text/javascript" src="{% static '/js/jquery-3.6.0.js' %}"></script>
+        <script src="https://kit.fontawesome.com/fe8b803c14.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+    </head>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+                }
+            }
+        }
+
+        var $table = $('#table')
+        $(function() {
+         var data = [
+        {
+            'id': 0,
+            'name': 'Item 0',
+            'price': '$0'
+        },
+      {
+        'id': 1,
+        'name': 'Item 1',
+        'price': '$1'
+      },
+      {
+        'id': 2,
+        'name': 'Item 2',
+        'price': '$2'
+      },
+      {
+        'id': 3,
+        'name': 'Item 3',
+        'price': '$3'
+      },
+      {
+        'id': 4,
+        'name': 'Item 4',
+        'price': '$4'
+      },
+      {
+        'id': 5,
+        'name': 'Item 5',
+        'price': '$5'
+      }
+    ]
+        $table.bootstrapTable({data: data})
+    }
+    </script>
+    <body>
+        <div class="banner">
+            <div class="navbar">
+                <ul>
+                    <li><a href="#"><i class="fas fa-user"></i>  About</a></li>
+                    <li><a href="#"><i class="fas fa-project-diagram"></i>   Projects</a></li>
+                    <li><a href="#"><i class="fas fa-file"></i>  Documents</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <table id="table">
+            <thead>
+              <tr>
+                <th data-field="id">Date</th>
+                <th data-field="name">Message Passed</th>
+                <th data-field="price">Item Price</th>
+              </tr>
+            </thead>
+          </table>
+    </body>
+</html>
+
+{% endblock %}

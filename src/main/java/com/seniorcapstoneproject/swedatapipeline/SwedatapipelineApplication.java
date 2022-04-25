@@ -33,8 +33,10 @@ import java.util.Map;
 import java.util.Properties;
 
 //import SpringBoot Framework to containerize API
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.context.ApplicationContext;
@@ -44,8 +46,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SwedatapipelineApplication {
     public static void main(String[] args) {
 
-      ApplicationContext apc = SpringApplication.run(SwedatapipelineApplication.class, args);
-      
+      //ApplicationContext apc = SpringApplication.run(SwedatapipelineApplication.class, args);
+      SpringApplication.run(SwedatapipelineApplication.class, args);
+
+        CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
+            return args ->{
+                kafkaTemplate.send(topic:"swedatapipeline", data:"StormEvents.csv");
+            }
+        }
       /*deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
       deepProducer produce = new deepProducer(); //Consumer and Producer classes implement as an interface
         try {
