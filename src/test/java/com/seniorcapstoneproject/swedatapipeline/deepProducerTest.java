@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 //Java imports declaration
 import org.apache.kafka.clients.admin;
 import org.apache.kafka.clients.producer;
+import org.apache.kafka.clients.producer.MockProducer;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
@@ -32,8 +33,8 @@ public class deepProducerTest {
 
         MockProducer mockProducer = new MockProducer<>(true, new StringSerializer(), new StringSerializer());
 
-        kafkaProducer = new KafkaProducer(mockProducer);
-        Future<RecordMetadata> recordMetadataFuture = kafkaProducer.send("soccer", 
+        mockProducer = new KafkaProducer(mockProducer);
+        Future<RecordMetadata> recordMetadataFuture = mockProducer.send("soccer", 
         "{\"site\" : \"baeldung\"}");
 
         assertTrue(mockProducer.history().size() == 1);
@@ -53,8 +54,8 @@ public class deepProducerTest {
         this.mockProducer = new MockProducer<>(cluster, true, new EvenOddPartitioner(), 
         new StringSerializer(), new StringSerializer());
 
-        kafkaProducer = new KafkaProducer(mockProducer);
-        Future<RecordMetadata> recordMetadataFuture = kafkaProducer.send("partition", 
+        mockProducer = new KafkaProducer(mockProducer);
+        Future<RecordMetadata> recordMetadataFuture = mockProducer.send("partition", 
         "{\"site\" : \"baeldung\"}");
 
         assertTrue(recordMetadataFuture.get().partition() == 1);
@@ -66,8 +67,8 @@ public class deepProducerTest {
         MockProducer<String, String> mockProducer = new MockProducer<>(false, 
         new StringSerializer(), new StringSerializer());
 
-        kafkaProducer = new KafkaProducer(mockProducer);
-        Future<RecordMetadata> record = kafkaProducer.send("site", "{\"site\" : \"baeldung\"}");
+        mockProducer = new KafkaProducer(mockProducer);
+        Future<RecordMetadata> record = mockProducer.send("site", "{\"site\" : \"baeldung\"}");
         RuntimeException e = new RuntimeException();
         mockProducer.errorNext(e);
 
