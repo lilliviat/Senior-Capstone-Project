@@ -48,11 +48,12 @@ public class SwedatapipelineApplication {
 
       //ApplicationContext apc = SpringApplication.run(SwedatapipelineApplication.class, args);
       SpringApplication.run(SwedatapipelineApplication.class, args);
-
+    }
+@Bean
         CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
             return args ->{
-                kafkaTemplate.send(topic:"swedatapipeline", data:"StormEvents.csv");
-            }
+                kafkaTemplate.send(topic="swedatapipeline", data="StormEvents.csv");
+            };
         }
       /*deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
       deepProducer produce = new deepProducer(); //Consumer and Producer classes implement as an interface
@@ -76,4 +77,4 @@ public class SwedatapipelineApplication {
                 runProducer(Integer.parseInt(args[0]));
             }*/
     }
-}
+
