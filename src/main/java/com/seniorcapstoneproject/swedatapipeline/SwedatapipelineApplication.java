@@ -40,6 +40,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
@@ -49,9 +50,10 @@ public class SwedatapipelineApplication {
       //ApplicationContext apc = SpringApplication.run(SwedatapipelineApplication.class, args);
       SpringApplication.run(SwedatapipelineApplication.class, args);
 
+        @Bean
         CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
             return args ->{
-                kafkaTemplate.send(topic:"swedatapipeline", data:"StormEvents.csv");
+                kafkaTemplate.send(topic="swedatapipeline", data="StormEvents.csv");
             }
         }
       /*deepFlowConsumer consume = new deepFlowConsumer(); //Utilize Dependency Injection; Instead of hardcoding each object.
