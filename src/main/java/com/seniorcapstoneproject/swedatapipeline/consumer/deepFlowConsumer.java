@@ -22,17 +22,19 @@
 */
 
 //Maven Kafka Package
-package com.seniorcapstoneproject.swedatapipeline;
+package com.seniorcapstoneproject.swedatapipeline.consumer;
 
-//Java import statements
-import org.apache.kafka.clients.admin;
-import org.apache.kafka.clients.producer;
+import org.apache.kafka.clients.consumer.Consumer;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.common.errors.WakeupException;
+import org.apache.kafka.common.message.ConsumerProtocolAssignment.TopicPartition;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
+import java.time.Duration;
 import java.util.Collections;
 
 //import SpringBoot Framework to containerize API
@@ -64,7 +66,7 @@ public class deepFlowConsumer{
 
     //Read from topic and point to partitions
     void assign(String topic, int partition){
-    consume(() -> consumer.assign(Collections.singleton(new TopicPartition(topic, partition))));
+    consume(() -> consumer.assign(Collections.singleton(new TopicPartition())));
     }
 
     void consume(Runnable beforePollingTask) {
@@ -78,7 +80,7 @@ public class deepFlowConsumer{
                 consumer.commitSync();
             }
         } catch (WakeupException e) {
-            logger.info("Stopping stream...");
+            mrlogger.info("Stopping stream...");
         } catch (RuntimeException ex) {
             exceptionConsumer.accept(ex);
         } finally {

@@ -16,7 +16,7 @@ services:
   zookeeper:
     image: "bitnami/zookeeper:latest"
     environment:
-      ALLOW_ANONYMOUS_LOGIN: yes
+      ALLOW_ANONYMOUS_LOGIN: "yes"
     restart: always
     networks:
       - swedatapipeline

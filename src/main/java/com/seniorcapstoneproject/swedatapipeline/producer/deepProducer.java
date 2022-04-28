@@ -23,14 +23,15 @@
 */
 
 //Maven Kafka Package
-package com.seniorcapstoneproject.swedatapipeline;
+package com.seniorcapstoneproject.swedatapipeline.producer;
 
-//Java imports declaration
-import org.apache.kafka.clients.admin;
-import org.apache.kafka.clients.producer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
+import java.util.concurrent.Future;
 import java.util.Collections;
 
 //import SpringBoot Framework to containerize API
@@ -42,15 +43,17 @@ import org.springframework.web.bind.annotation.RestController;
 //Create the Java class for the Kafka Topic Producer API
 public class deepProducer{
     //Create Producer
-    final Producer<String, String> producer = createProducer();    
+    Producer<String, String> producer = createProducer();    
     
     //Producer Constructor
     public deepProducer(Producer<String, String> producer){
         this.producer = producer;
     }
-
+    private Producer<String, String> createProducer() {
+        return null;
+    }
     //Kafka send Metadata
-    public Future<RecordMEtadata> send(String key, String content){
+    public Future<RecordMetadata> send(String key, String content){
         ProducerRecord record = new ProducerRecord("swedatapipeline", key, content);
         return producer.send(record);
     }
@@ -64,7 +67,7 @@ public class deepProducer{
     }
     
     public void initTransaction() {
-        producer.initTransaction();
+        producer.initTransactions();
     }
 
     public void commitTransaction() {
