@@ -68,6 +68,14 @@
 				<version>1.11.163</version>
 			</dependency>
 			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>ec2</artifactId>
+			  </dependency>
+			  <dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>s3</artifactId>
+			  </dependency>
+			<dependency>
 				<groupId>com.opencsv</groupId>
 				<artifactId>opencsv</artifactId>
 				<version>4.1</version>
